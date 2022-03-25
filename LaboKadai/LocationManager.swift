@@ -2,8 +2,8 @@ import MapKit
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     let manager = CLLocationManager()
-    @Published var region = MKCoordinateRegion()
-    
+    @Published var region =  MKCoordinateRegion()
+
     override init() {
         super.init()
         manager.delegate = self
@@ -14,17 +14,17 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        locations.last.map{
+        locations.last.map {
             let center = CLLocationCoordinate2D(
                 latitude: $0.coordinate.latitude,
                 longitude: $0.coordinate.longitude)
-        region = MKCoordinateRegion(
-            center: center,
-            latitudinalMeters: 1000.0,
-            longitudinalMeters: 1000.0
-        )
-            
+            region = MKCoordinateRegion(
+                center: center,
+                latitudinalMeters: 1000.0,
+                longitudinalMeters: 1000.0
+            )
         }
     }
 }
+
 
